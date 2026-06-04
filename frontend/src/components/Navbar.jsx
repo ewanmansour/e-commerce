@@ -83,17 +83,17 @@ const Navbar = () => {
           </button>
         </div>
         {/* Mobile menu backdrop overlay */}
-        <div
+        <div 
           onClick={() => setVisible(false)}
           className={cn(
-            'fixed inset-0 z-40 bg-black/40 backdrop-blur-xs transition-opacity duration-300 sm:hidden',
-            visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            'fixed inset-0 z-40 bg-transparent sm:hidden',
+            visible ? 'pointer-events-auto' : 'pointer-events-none'
           )}
         />
 
         {/* sidebar menu for small screen */}
         <div className={cn(
-          'fixed inset-y-0 right-0 z-50 w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out sm:hidden flex flex-col text-neutral-700',
+          'fixed inset-y-0 right-0 z-50 w-72 bg-white shadow-2xl transform-gpu transition-transform duration-300 ease-in-out sm:hidden flex flex-col text-neutral-700 will-change-transform',
           visible ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
         )}>
           <div className='flex h-full flex-col'>
