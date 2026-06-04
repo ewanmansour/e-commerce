@@ -17,6 +17,13 @@ import QuickViewModal from './components/QuickViewModal'
 
 
 const App = () => {
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className='min-h-screen bg-[#fbfaf7] px-4 text-neutral-950 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <AppBoot />

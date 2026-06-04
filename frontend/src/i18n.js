@@ -16,7 +16,7 @@ const resources = {
       },
       hero: {
         kicker: 'New Season Edit',
-        title: 'E-COMMERCE',
+        title: 'MY STORE',
         body: 'Refined everyday pieces, clean silhouettes, and reliable wardrobe staples built for repeat wear.',
         shop: 'Shop Collection',
         story: 'Our Story',
