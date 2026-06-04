@@ -82,20 +82,40 @@ const Navbar = () => {
             <Menu size={16} />
           </button>
         </div>
+        {/* Mobile menu backdrop overlay */}
+        <div
+          onClick={() => setVisible(false)}
+          className={cn(
+            'fixed inset-0 z-40 bg-black/40 backdrop-blur-xs transition-opacity duration-300 sm:hidden',
+            visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          )}
+        />
+
         {/* sidebar menu for small screen */}
-        <div className={`fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-white backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className='flex min-h-screen flex-col text-neutral-700'>
-            <div className='flex flex-col py-4 bg-white rounded-2xl'>
-              <div onClick={() => setVisible(false)} className='flex cursor-pointer items-center gap-3 border-b border-neutral-200/50 bg-neutral-50/50 p-5 transition-colors hover:bg-neutral-100/50'>
-                <ChevronLeft size={18} />
-                <p className='font-medium'>Back</p>
-              </div>
+        <div className={cn(
+          'fixed inset-y-0 right-0 z-50 w-72 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out sm:hidden flex flex-col text-neutral-700',
+          visible ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+        )}>
+          <div className='flex h-full flex-col'>
+            {/* Header / Back button */}
+            <div
+              onClick={() => setVisible(false)}
+              className='flex cursor-pointer items-center gap-3 border-b border-neutral-200/60 bg-neutral-100/40 p-5 transition-colors hover:bg-neutral-100/80 active:bg-neutral-200/50'
+            >
+              <ChevronLeft size={18} />
+              <p className='font-medium text-neutral-800'>Back</p>
+            </div>
+
+            {/* Nav links */}
+            <div className='flex flex-col py-4 gap-1 bg-white rounded-2xl'>
               {navLinks.map((link) => (
                 <NavLink
                   onClick={() => setVisible(false)}
                   className={({ isActive }) => cn(
-                    'mx-4 my-1.5 flex items-center rounded-2xl px-5 py-3.5 text-sm font-semibold tracking-wide transition-all duration-200',
-                    isActive ? 'bg-neutral-950 text-white shadow-md' : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950 hover:shadow-sm'
+                    'mx-4 my-1 flex items-center rounded-xl px-5 py-3.5 text-sm font-semibold tracking-wide transition-all duration-200',
+                    isActive
+                      ? 'bg-neutral-950 text-white shadow-md'
+                      : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950 hover:shadow-xs'
                   )}
                   to={link.to}
                   key={link.to}

@@ -10,6 +10,10 @@ a.active hr {
     font-family: Outfit, system-ui, sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     color: #171717;
     background: #ffffff;

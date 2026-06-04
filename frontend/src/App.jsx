@@ -20,7 +20,7 @@ import ScrollToTop from './components/ScrollToTop'
 const App = () => {
 
   return (
-    <div className='min-h-screen bg-[#fbfaf7] px-4 text-neutral-950 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+    <div className='min-h-screen bg-[#fbfaf7] px-4 text-neutral-950 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] overflow-x-hidden'>
       <ScrollToTop />
       <AppBoot />
       <Toaster richColors position='top-center' />
