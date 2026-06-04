@@ -1,0 +1,115 @@
+import { useContext, useState } from 'react'
+import { assets } from '../assets/assets'
+import { Link, NavLink } from 'react-router-dom'
+import { ShopContext } from '../context/shop-context';
+import { ChevronLeft, Languages, LogOut, Menu, Package, Search, ShoppingBag, UserRound } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useInterfaceStore } from '../store/interfaceStore';
+import { cn } from '../utils/cn';
+
+const navLinks = [
+  { to: '/', labelKey: 'nav.home' },
+  { to: '/collection', labelKey: 'nav.collection' },
+  { to: '/about', labelKey: 'nav.about' },
+  { to: '/contact', labelKey: 'nav.contact' },
+];
+
+const Navbar = () => {
+
+  const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
+  const toggleLanguage = useInterfaceStore((state) => state.toggleLanguage);
+
+  const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+
+  const logout = () => {
+    navigate('/login')
+    localStorage.removeItem('token')
+    setToken('')
+    setCartItems({})
+  }
+
+  return (
+    <header className='sticky top-0 z-40 -mx-4 border-b border-black/4 bg-[#fbfaf7]/80 px-4 backdrop-blur-md transition-all duration-300 sm:mx-[-5vw] sm:px-[5vw] md:mx-[-7vw] md:px-[7vw] lg:mx-[-9vw] lg:px-[9vw]'>
+      <div className='flex items-center justify-between py-3.5 font-medium'>
+        <Link to='/' aria-label='Forever home' className='transition-all duration-200 hover:opacity-90 active:scale-98'>
+          <img src={assets.logof} className='w-16 sm:w-20' alt="Forever" />
+        </Link>
+
+        <ul className='hidden rounded-full border border-neutral-200/80 bg-white/70 p-1 text-sm text-neutral-600 shadow-xs backdrop-blur-xs sm:flex'>
+          {navLinks.map((link) => (
+            <NavLink
+              to={link.to}
+              key={link.to}
+              className={({ isActive }) => cn(
+                'rounded-full px-4.5 py-1.5 font-medium transition-all duration-200',
+                isActive ? 'bg-neutral-950 text-white shadow-xs' : 'hover:bg-neutral-100 hover:text-neutral-950',
+              )}
+            >
+              {t(link.labelKey)}
+            </NavLink>
+          ))}
+        </ul>
+
+        <div className='flex items-center gap-2.5 sm:gap-3.5'>
+
+          <button onClick={() => setShowSearch(prev => !prev)} className='flex h-9.5 w-9.5 items-center justify-center rounded-full border border-neutral-200/80 bg-white text-neutral-700 transition-all duration-200 hover:scale-105 hover:border-neutral-950 hover:text-neutral-950 hover:shadow-xs active:scale-95' aria-label={t('search.open')}>
+            <Search size={16} />
+          </button>
+          <div className='group relative'>
+            <button onClick={() => token ? null : navigate('/login')} className='flex h-9.5 w-9.5 items-center justify-center rounded-full border border-neutral-200/80 bg-white text-neutral-700 transition-all duration-200 hover:scale-105 hover:border-neutral-950 hover:text-neutral-950 hover:shadow-xs active:scale-95' aria-label='Account'>
+              <UserRound size={16} />
+            </button>
+            {/* Dropdown menu */}
+            {token &&
+              <div className='dropdown-menu absolute right-0 hidden pt-3 group-hover:block transition-all duration-300'>
+                <div className='flex w-44 flex-col gap-1.5 rounded-xl border border-neutral-200/80 bg-white/95 p-2 text-sm text-neutral-600 shadow-xl backdrop-blur-xs'>
+                  <p className='flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-neutral-50 hover:text-neutral-950 font-medium'><UserRound size={15} />{t('nav.account')}</p>
+                  <p onClick={() => navigate('/orders')} className='flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-neutral-50 hover:text-neutral-950 font-medium'><Package size={15} />{t('nav.orders')}</p>
+                  <hr className='border-neutral-100 my-0.5' />
+                  <p onClick={logout} className='flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-red-600 transition-all duration-200 hover:bg-red-50 hover:text-red-700 font-medium'><LogOut size={15} />{t('nav.logout')}</p>
+                </div>
+              </div>
+            }
+
+          </div>
+          <Link to='/cart' className='relative flex h-9.5 w-9.5 items-center justify-center rounded-full border border-neutral-200/80 bg-white text-neutral-700 transition-all duration-200 hover:scale-105 hover:border-neutral-950 hover:text-neutral-950 hover:shadow-xs active:scale-95' aria-label='Cart'>
+            <ShoppingBag size={16} />
+            <span className='absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-emerald-700 px-1 text-[9px] font-bold text-white shadow-xs'>{getCartCount()}</span>
+
+          </Link>
+          <button onClick={() => setVisible(true)} className='flex h-9.5 w-9.5 items-center justify-center rounded-full border border-neutral-200 bg-white sm:hidden' aria-label='Open menu'>
+            <Menu size={16} />
+          </button>
+        </div>
+        {/* sidebar menu for small screen */}
+        <div className={`fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-white backdrop-blur-xl shadow-2xl transform transition-transform duration-300 ${visible ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className='flex min-h-screen flex-col text-neutral-700'>
+            <div className='flex flex-col py-4 bg-white rounded-2xl'>
+              <div onClick={() => setVisible(false)} className='flex cursor-pointer items-center gap-3 border-b border-neutral-200/50 bg-neutral-50/50 p-5 transition-colors hover:bg-neutral-100/50'>
+                <ChevronLeft size={18} />
+                <p className='font-medium'>Back</p>
+              </div>
+              {navLinks.map((link) => (
+                <NavLink
+                  onClick={() => setVisible(false)}
+                  className={({ isActive }) => cn(
+                    'mx-4 my-1.5 flex items-center rounded-2xl px-5 py-3.5 text-sm font-semibold tracking-wide transition-all duration-200',
+                    isActive ? 'bg-neutral-950 text-white shadow-md' : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950 hover:shadow-sm'
+                  )}
+                  to={link.to}
+                  key={link.to}
+                >
+                  {t(link.labelKey)}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  )
+}
+
+export default Navbar

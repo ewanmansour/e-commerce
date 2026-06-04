@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import "tailwindcss";
+
+a.active hr {
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Outfit, system-ui, sans-serif;
+}
+
+body {
+    color: #171717;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+#nprogress .bar {
+    height: 3px;
+    background: #047857;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px #047857, 0 0 5px #047857;
+}
+
+#nprogress .spinner {
+    display: none;
+}
+
+.product-gallery-shell .image-gallery-content {
+    background: #ffffff;
+}
+
+.product-gallery-shell .image-gallery-slide .image-gallery-image {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-height: none;
+    cursor: zoom-in;
+    object-fit: cover;
+    background: #f5f5f5;
+}
+
+.product-gallery-shell .image-gallery-thumbnails-wrapper.left {
+    width: 96px;
+}
+
+.product-gallery-shell .image-gallery-thumbnail {
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+}
+
+.product-gallery-shell .image-gallery-thumbnail.active,
+.product-gallery-shell .image-gallery-thumbnail:focus,
+.product-gallery-shell .image-gallery-thumbnail:hover {
+    border-color: #171717;
+}
+
+.product-gallery-shell .image-gallery-thumbnail-image {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.product-gallery-shell .image-gallery-icon {
+    filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.2));
+}
+
+@media (max-width: 640px) {
+    .product-gallery-shell .image-gallery-thumbnails-wrapper.left {
+        display: none;
+    }
+}
+
+/* Premium Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    display: block;
+}
+
+::-webkit-scrollbar-track {
+    background: #fbfaf7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #171717;
+}
+
+/* Form inputs & textarea styling */
+.form-field {
+    min-height: 44px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    background: #ffffff;
+    padding: 10px 14px;
+    font-size: 14px;
+    outline: none;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-field:focus {
+    border-color: #171717;
+    box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.05);
+    background: #ffffff;
+}
+
+/* Premium buttons */
+.primary-button {
+    min-height: 48px;
+    border-radius: 8px;
+    background: #171717;
+    padding: 0 28px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.primary-button:hover {
+    background: #047857;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.15), 0 4px 6px -2px rgba(4, 120, 87, 0.05);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+.primary-button:disabled {
+    cursor: not-allowed;
+    background: #a3a3a3;
+    transform: none;
+    box-shadow: none;
+}
+
+.prata-regular {
+    font-family: "Prata", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Premium Hover & Animation Utilities */
+.hover-lift {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width:640px) {
+    a.active {
+        background-color: black;
+        color: white;
+    }
+}
