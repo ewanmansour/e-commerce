@@ -11,7 +11,7 @@ a.active hr {
 }
 
 html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {

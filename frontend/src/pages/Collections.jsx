@@ -66,8 +66,11 @@ const Collections = () => {
 
                 {/* -----Filter options ----- */}
                 <aside className='min-w-64'>
-                    <p onClick={() => setShowFilter(!showFilter)} className='flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-neutral-950'>Filters
-                        <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="" />
+                    <p
+                        onClick={() => setShowFilter(!showFilter)}
+                        className="inline-flex cursor-pointer items-center gap-2 border border-gray-500 px-3 py-1 rounded-full text-sm font-semibold uppercase tracking-[0.18em] text-neutral-950"
+                    >Filters
+                        <img src={assets.dropdown_icon} className={`h-4 sm:hidden ${showFilter ? 'rotate-90' : ''}`} alt="" />
                     </p>
 
                     {/*----------- Category Filter ---------*/}

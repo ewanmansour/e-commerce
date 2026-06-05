@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 import { ShopContext } from '../context/shop-context';
@@ -17,10 +17,23 @@ const navLinks = [
 const Navbar = () => {
 
   const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { t } = useTranslation();
   const toggleLanguage = useInterfaceStore((state) => state.toggleLanguage);
 
   const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const logout = () => {
     navigate('/login')
@@ -30,10 +43,18 @@ const Navbar = () => {
   }
 
   return (
-    <header className='sticky top-0 z-40 -mx-4 border-b border-black/4 bg-[#fbfaf7]/80 px-4 backdrop-blur-md transition-all duration-300 sm:mx-[-5vw] sm:px-[5vw] md:mx-[-7vw] md:px-[7vw] lg:mx-[-9vw] lg:px-[9vw]'>
-      <div className='flex items-center justify-between py-3.5 font-medium'>
+    <header className={cn(
+      'sticky top-0 z-40 -mx-4 border-b px-4 backdrop-blur-md transition-all duration-300 sm:mx-[-5vw] sm:px-[5vw] md:mx-[-7vw] md:px-[7vw] lg:mx-[-9vw] lg:px-[9vw]',
+      scrolled
+        ? 'border-neutral-200/60 bg-[#fbfaf7]/90 shadow-sm'
+        : 'border-black/4 bg-[#fbfaf7]/80'
+    )}>
+      <div className={cn(
+        'flex items-center justify-between font-medium transition-all duration-300',
+        scrolled ? 'py-2.5' : 'py-3.5'
+      )}>
         <Link to='/' aria-label='Forever home' className='transition-all duration-200 hover:opacity-90 active:scale-98'>
-          <img src={assets.logof} className='w-16 sm:w-20' alt="Forever" />
+          <img src={assets.logof} className='w-13 sm:w-20' alt="Forever" />
         </Link>
 
         <ul className='hidden rounded-full border border-neutral-200/80 bg-white/70 p-1 text-sm text-neutral-600 shadow-xs backdrop-blur-xs sm:flex'>
@@ -83,7 +104,7 @@ const Navbar = () => {
           </button>
         </div>
         {/* Mobile menu backdrop overlay */}
-        <div 
+        <div
           onClick={() => setVisible(false)}
           className={cn(
             'fixed inset-0 z-40 bg-transparent sm:hidden',
