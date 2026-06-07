@@ -78,7 +78,7 @@ const List = ({ token }) => {
                             <p>{item.name}</p>
                             <p>{item.category}</p>
                             <p>{formatCurrency(item.price, currency)}</p>
-                            <p className='text-center cursor-pointer text-sm bg-red-700 text-white rounded-full py-1.5 px-3 mx-auto w-fit hover:bg-red-800 transition-all'>Remove</p>
+                            <p onClick={removeProduct} className='text-center cursor-pointer text-sm bg-red-700 text-white rounded-full py-1.5 px-3 mx-auto w-fit hover:bg-red-800 transition-all'>Remove</p>
                         </div>
 
                     ))

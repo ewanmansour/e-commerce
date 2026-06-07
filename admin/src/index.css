@@ -18,7 +18,7 @@ textarea {
     border-radius: 4px;
 }
 
-.active {
-    background-color: gray;
-    border-color: gray;
+a.active {
+    background-color: #ffebf5;
+    border-color: #ff4c3b;
 }

@@ -166,7 +166,7 @@ const Add = ({ token }) => {
                     <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
                 </div>
 
-                <button type='submit' className='w-28 py-3 mt-4 bg-black text-white rounded-4xl disabled:bg-gray-400'>{submitting ? 'SAVING' : 'ADD'}</button>
+                <button className='w-28 py-3 mt-4 bg-black text-white rounded-4xl disabled:bg-gray-400'>{submitting ? 'SAVING' : 'ADD'}</button>
             </div>
         </form>
     )
