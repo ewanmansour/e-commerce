@@ -78,7 +78,7 @@ const List = ({ token }) => {
                             <p>{item.name}</p>
                             <p>{item.category}</p>
                             <p>{formatCurrency(item.price, currency)}</p>
-                            <p onClick={() => removeProduct(item._id)} disabled className='text-center cursor-pointer text-sm bg-red-700 text-white rounded-full py-1.5 px-3 mx-auto w-fit hover:bg-red-800 transition-all'>Remove</p>
+                            <button disabled type="button" className='text-center cursor-not-allowed text-sm bg-gray-400 text-white rounded-full py-1.5 px-3 mx-auto w-fit'>Remove</button>
                         </div>
 
                     ))
